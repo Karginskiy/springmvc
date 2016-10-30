@@ -2,21 +2,22 @@ package wiring;
 
 import java.util.Collection;
 import java.util.Map;
+import java.util.Properties;
 
 public class OneManBand implements Performer {
 
-    private Map<String, Instrument> instruments;
+    private Properties instruments;
     
     @Override
     public void perform() throws PerformanceException {
-        for (String key : instruments.keySet()) {
+        for (Object key : instruments.keySet()) {
             System.out.print(key + " : ");
-            Instrument instrument = instruments.get(key);
+            Instrument instrument = (Instrument) instruments.get(key);
             instrument.play();
         }
     }
 
-    public void setInstruments(Map<String, Instrument> instruments) {
+    public void setInstruments(Properties instruments) {
         this.instruments = instruments;
     }
 }
