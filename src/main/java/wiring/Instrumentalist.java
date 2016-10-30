@@ -1,6 +1,6 @@
 package wiring;
 
-public class Instrumentalist implements Performer {
+public abstract class Instrumentalist implements Performer {
 
     private String song;
     private Instrument instrument;
@@ -25,6 +25,8 @@ public class Instrumentalist implements Performer {
         return song;
         
     }
+
+    public abstract Instrument getInstrument();
 
     public void setInstrument(Instrument instrument) {
         this.instrument = instrument;
