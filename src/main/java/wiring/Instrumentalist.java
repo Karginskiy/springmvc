@@ -1,15 +1,17 @@
 package wiring;
 
-import annotations.Strummed;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+
+import javax.inject.Inject;
+import javax.inject.Named;
 
 public abstract class Instrumentalist implements Performer {
 
     private String song;
-    @Autowired
-    @Qualifier("guitar")
-    @Strummed
+
+    @Named("guitar")
     private Instrument instrument;
 
     public Instrumentalist() {
@@ -40,7 +42,7 @@ public abstract class Instrumentalist implements Performer {
 
     public abstract Instrument getInstrument();
 
-    @Autowired
+    @Qualifier(value = "guitar")
     public void setInstrument(Instrument instrument) {
         this.instrument = instrument;
     }
