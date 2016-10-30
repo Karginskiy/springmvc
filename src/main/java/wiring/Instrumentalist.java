@@ -1,9 +1,19 @@
 package wiring;
 
+import annotations.Strummed;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+
 public abstract class Instrumentalist implements Performer {
 
     private String song;
+    @Autowired
+    @Qualifier("guitar")
+    @Strummed
     private Instrument instrument;
+
+    public Instrumentalist() {
+    }
 
     @Override
     public void perform() throws PerformanceException {
@@ -11,7 +21,9 @@ public abstract class Instrumentalist implements Performer {
         instrument.play();
     }
 
-
+    public Instrumentalist(Instrument instrument) {
+        this.instrument = instrument;
+    }
 
     public String getSong() {
         return song;
@@ -28,6 +40,7 @@ public abstract class Instrumentalist implements Performer {
 
     public abstract Instrument getInstrument();
 
+    @Autowired
     public void setInstrument(Instrument instrument) {
         this.instrument = instrument;
     }
