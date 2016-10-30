@@ -1,14 +1,14 @@
 package wiring;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
-import javax.inject.Inject;
 import javax.inject.Named;
 
-public abstract class Instrumentalist implements Performer {
+@Component("eddie")
+public class Instrumentalist implements Performer {
 
     @Value("#{systemProperties.myFavoriteSong}")
     private String song;
@@ -42,7 +42,9 @@ public abstract class Instrumentalist implements Performer {
         
     }
 
-    public abstract Instrument getInstrument();
+    public Instrument getInstrument() {
+        return this.instrument;
+    }
 
     @Qualifier(value = "guitar")
     public void setInstrument(Instrument instrument) {
